@@ -434,6 +434,10 @@ header {
   padding: 2rem;
 }
 
+.portfolio-body .btn {
+  margin-top: 1.25rem;
+}
+
 .portfolio-meta {
   font-size: 0.75rem;
   font-weight: 700;
