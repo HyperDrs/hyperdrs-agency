@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPortfolioFilter();
   initContactForm();
   initScrollReveal();
+  initPersonaModal();
 });
 
 /**
@@ -170,5 +171,45 @@ function initScrollReveal() {
 
   revealElements.forEach(el => {
     observer.observe(el);
+  });
+}
+
+/**
+ * Lightbox Modal for Buyer Persona
+ */
+function initPersonaModal() {
+  const modal = document.getElementById('persona-modal');
+  const wrapper = document.querySelector('.persona-image-wrapper');
+  const img = document.getElementById('persona-trigger');
+  const modalImg = document.getElementById('modal-img');
+  const captionText = document.getElementById('modal-caption');
+  const closeBtn = document.querySelector('.modal-close');
+
+  if (!modal || !wrapper || !img || !modalImg || !closeBtn) return;
+
+  wrapper.addEventListener('click', () => {
+    modal.style.display = 'block';
+    modalImg.src = img.src;
+    captionText.innerHTML = img.alt;
+    document.body.style.overflow = 'hidden'; // Disable background scrolling
+  });
+
+  const closeModal = () => {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable background scrolling
+  };
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Esc key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.style.display === 'block') {
+      closeModal();
+    }
   });
 }
